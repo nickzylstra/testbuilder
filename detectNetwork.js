@@ -26,11 +26,12 @@ var detectNetwork = function(cardNumber) {
     cardNetwork = 'Visa';
   } else if ([16].includes(cardLength) && ['51', '52', '53', '54', '55'].includes(cardFirstTwoChars)) {
     cardNetwork = 'MasterCard';
+  // could refactor for regex on next two
   } else if ([16, 19].includes(cardLength) && (['65'].includes(cardFirstTwoChars) ||
                                                ['644', '645', '646', '647', '648', '649'].includes(cardNumber.slice(0, 3)) ||
                                                ['6011'].includes(cardNumber.slice(0,4)))) {
     cardNetwork = 'Discover';
-  } else if ([12, 13, 14, 15, 16, 17, 18, 19].includes(cardLength) && ['5018', '5038', '5038', '6304'].includes(cardNumber.slice(0,4))) {
+  } else if ([12, 13, 14, 15, 16, 17, 18, 19].includes(cardLength) && ['5018', '5020', '5038', '6304'].includes(cardNumber.slice(0,4))) {
     cardNetwork = 'Maestro';
   }
 
