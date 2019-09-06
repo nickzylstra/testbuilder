@@ -25,7 +25,7 @@ var detectNetwork = function(cardNumber) {
   } else if ([13, 16, 19].includes(cardLength) && ['4'].includes(cardFirstTwoChars.slice(0,1))) {
     cardNetwork = 'Visa';
   } else if ([16].includes(cardLength) && ['51', '52', '53', '54', '55'].includes(cardFirstTwoChars)) {
-    cardNetwork = 'Mastercard';
+    cardNetwork = 'MasterCard';
   }
 
   return cardNetwork;
