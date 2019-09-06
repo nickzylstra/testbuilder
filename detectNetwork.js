@@ -14,19 +14,18 @@ var detectNetwork = function(cardNumber) {
 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
 
-  let cardPrefix = parseInt(cardNumber.slice(0,2));
+  let cardFirstTwoChars = cardNumber.slice(0,2);
   let cardLength = cardNumber.length;
   let cardNetwork = undefined;
 
-  // other card types in later part of exercise require range
-  function isWithinRange (int, low, high) {
-    return (int <= high && int >= low);
-  }
-
-  if (cardLength === 14 && isWithinRange(cardPrefix, 38, 39)) {
+  if ([14].includes(cardLength) && ['38', '39'].includes(cardFirstTwoChars)) {
     cardNetwork = 'Diner\'s Club'; 
-  } else if (cardLength === 15 && (cardPrefix === 34 || cardPrefix === 37)) {
+  } else if ([15].includes(cardLength) && ['34', '37'].includes(cardFirstTwoChars)) {
     cardNetwork =  'American Express';
+  } else if ([13, 16, 19].includes(cardLength) && ['4'].includes(cardFirstTwoChars.slice(0,1))) {
+    cardNetwork = 'Visa';
+  } else if ([16].includes(cardLength) && ['51', '52', '53', '54', '55'].includes(cardFirstTwoChars)) {
+    cardNetwork = 'Mastercard';
   }
 
   return cardNetwork;
