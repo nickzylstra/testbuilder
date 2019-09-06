@@ -33,7 +33,7 @@ describe('Introduction to Mocha Tests - READ ME FIRST', function() {
   // A test should only fail if the expected behavior doesn't match the actual.
   it('Throws an error when expected behavior does not match actual behavior', function() {
     var even = function(num){
-      return num/2 === 0;
+      return num % 2 === 0;
     };
 
     if(even(10) !== true) {
@@ -53,7 +53,7 @@ describe('Diner\'s Club', function() {
   });
 
   it('has a prefix of 39 and a length of 14', function() {
-    if (detectNetwork('3934567890123') !== 'Diner\'s Club') {
+    if (detectNetwork('39345678901234') !== 'Diner\'s Club') {
       throw new Error('Test failed');
     }
  
@@ -130,11 +130,11 @@ describe('MasterCard', function() {
   var should = chai.should();
   
   it('has a prefix of 54 and a length of 16', function() {
-    detectNetwork('5412345678901234').should.equal('Mastercard');
+    detectNetwork('5412345678901234').should.equal('MasterCard');
   });
  
   it('has a prefix of 55 and a length of 16', function() {
-    detectNetwork('5512345678901234').should.equal('Mastercard');
+    detectNetwork('5512345678901234').should.equal('MasterCard');
   });
  
 });
