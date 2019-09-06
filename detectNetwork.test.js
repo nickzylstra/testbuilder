@@ -154,11 +154,92 @@ describe('MasterCard', function() {
 describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
-  it('has a prefix of 6011 and a length of 16');
-  it('has a prefix of 6011 and a length of 19');
+
+  var should = chai.should();
+
+  // is it okay to put test in a loop or do they need to be written out separately?  loop okay per Lee
+
+  it('has a prefix of 6011 and a length of 16', function() {
+    detectNetwork('6011123456789012').should.equal('Discover');
+  });
+
+  it('has a prefix of 644 and a length of 16', function() {
+    detectNetwork('6441123456789012').should.equal('Discover');
+  });
+
+  it('has a prefix of 645 and a length of 16', function() {
+    detectNetwork('6451123456789012').should.equal('Discover');
+  });
+  
+  it('has a prefix of 646 and a length of 16', function() {
+    detectNetwork('6461123456789012').should.equal('Discover');
+  });
+  
+  it('has a prefix of 647 and a length of 16', function() {
+    detectNetwork('6471123456789012').should.equal('Discover');
+  });
+
+  it('has a prefix of 648 and a length of 16', function() {
+    detectNetwork('6481123456789012').should.equal('Discover');
+  });
+
+  it('has a prefix of 649 and a length of 16', function() {
+    detectNetwork('6491123456789012').should.equal('Discover');
+  });
+  
+  it('has a prefix of 65 and a length of 16', function() {
+    detectNetwork('6511123456789012').should.equal('Discover');
+  });
+  
+  it('has a prefix of 6011 and a length of 19', function() {
+    detectNetwork('6011123456789012345').should.equal('Discover');
+  });
+
+  it('has a prefix of 644 and a length of 19', function() {
+    detectNetwork('6441123456789012345').should.equal('Discover');
+  });
+
+  it('has a prefix of 645 and a length of 19', function() {
+    detectNetwork('6451123456789012345').should.equal('Discover');
+  });
+  
+  it('has a prefix of 646 and a length of 19', function() {
+    detectNetwork('6461123456789012345').should.equal('Discover');
+  });
+  
+  it('has a prefix of 647 and a length of 19', function() {
+    detectNetwork('6471123456789012345').should.equal('Discover');
+  });
+
+  it('has a prefix of 648 and a length of 19', function() {
+    detectNetwork('6481123456789012345').should.equal('Discover');
+  });
+
+  it('has a prefix of 649 and a length of 19', function() {
+    detectNetwork('6491123456789012345').should.equal('Discover');
+  });
+  
+  it('has a prefix of 65 and a length of 19', function() {
+    detectNetwork('6511123456789012345').should.equal('Discover');
+  });
 });
 
 describe('Maestro', function() {
   // Write full test coverage for the Maestro card
+
+  var should = chai.should();
+
+  let prefixes = ['5018', '5020', '5038', '6304'];
+  let lengths = [12, 13, 14, 15, 16, 17, 18, 19];
+
+  for (let i = 0; i < prefixes.length; i++) {
+    for (let j = 0; j < lengths.length; j++) {
+      let cardNumber = `${prefixes[i]}12345678`.padEnd(lengths[j], '1');
+      
+      it(`has a prefix of ${prefixes[i]} and a length of ${lengths[j]}`, function() {
+        detectNetwork(cardNumber).should.equal('Maestro');
+      });
+    }
+  }
 });
 
