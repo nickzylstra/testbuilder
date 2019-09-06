@@ -13,6 +13,21 @@ var detectNetwork = function(cardNumber) {
   // The American Express network always starts with a 34 or 37 and is 15 digits long
 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
+
+  let cardPrefix = parseInt(cardNumber.slice(0,2));
+  let cardLength = cardNumber.length;
+  let cardNetwork = undefined;
+
+  // other card types in later part of exercise require range
+  function isWithinRange (int, low, high) {
+    return (int <= high && int >= low);
+  }
+
+  if (cardLength === 14 && isWithinRange(cardPrefix, 38, 39)) {
+    cardNetwork = 'Diner\'s Club'; 
+  } else if (cardLength === 15 && (cardPrefix === 34 || cardPrefix === 37)) {
+    cardNetwork =  'American Express';
+  }
+
+  return cardNetwork;
 };
-
-
