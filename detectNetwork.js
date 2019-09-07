@@ -57,7 +57,7 @@ var detectNetwork = function(cardNumber) {
           }
         }
 
-        for (let prefix = 6282; prefix < 6288; prefix++) {
+        for (let prefix = 6282; prefix < 6289; prefix++) {
           let prefixStr = prefix.toString();
           if (prefixStr === cardNumber.slice(0, prefixStr.length)) {
             cardNetwork = 'China UnionPay';
