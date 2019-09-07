@@ -38,17 +38,34 @@ var detectNetwork = function(cardNumber) {
   } else if ([12, 13, 14, 15, 16, 17, 18, 19].includes(cardLength) &&
              ['5018', '5020', '5038', '6304'].includes(cardNumber.slice(0, 4))) {
     cardNetwork = 'Maestro';
-  } else {
+  } else { // refactor to loop better, seems like a mess and unneccesarily goes through extra steps
     for (let length = 16; length < 20; length++) {
-      for (let prefix = 622126; prefix < 622926; prefix++) {
-        // fill in
+      if (length === cardLength) {
+        for (let prefix = 622126; prefix < 622926; prefix++) {
+          let prefixStr = prefix.toString();
+          if (prefixStr === cardNumber.slice(0, prefixStr.length)) {
+            cardNetwork = 'China UnionPay';
+            break;
+          }
+        }
+
+        for (let prefix = 624; prefix < 627; prefix++) {
+          let prefixStr = prefix.toString();
+          if (prefixStr === cardNumber.slice(0, prefixStr.length)) {
+            cardNetwork = 'China UnionPay';
+            break;
+          }
+        }
+
+        for (let prefix = 6282; prefix < 6288; prefix++) {
+          let prefixStr = prefix.toString();
+          if (prefixStr === cardNumber.slice(0, prefixStr.length)) {
+            cardNetwork = 'China UnionPay';
+            break;
+          }
+        }
       }
-
-      // next set
-
-      // next set
     }
-    cardNetwork = 'China UnionPay'; 
   }
   
   return cardNetwork;
