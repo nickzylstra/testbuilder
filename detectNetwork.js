@@ -22,18 +22,34 @@ var detectNetwork = function(cardNumber) {
     cardNetwork = 'Diner\'s Club'; 
   } else if ([15].includes(cardLength) && ['34', '37'].includes(cardFirstTwoChars)) {
     cardNetwork =  'American Express';
+  } else if ([16, 18, 19].includes(cardLength) && 
+             (['4903', '4905', '4911', '4936', '6333', '6759'].includes(cardNumber.slice(0, 4)) ||
+              ['564182', '633110'].includes(cardNumber.slice(0, 6)))) {
+    cardNetwork = 'Switch'; // before visa due to overlap in numbers, longer prefix takes precedence
   } else if ([13, 16, 19].includes(cardLength) && ['4'].includes(cardFirstTwoChars.slice(0,1))) {
     cardNetwork = 'Visa';
   } else if ([16].includes(cardLength) && ['51', '52', '53', '54', '55'].includes(cardFirstTwoChars)) {
     cardNetwork = 'MasterCard';
-  // could refactor for regex on next two
-  } else if ([16, 19].includes(cardLength) && (['65'].includes(cardFirstTwoChars) ||
-                                               ['644', '645', '646', '647', '648', '649'].includes(cardNumber.slice(0, 3)) ||
-                                               ['6011'].includes(cardNumber.slice(0,4)))) {
+  } else if ([16, 19].includes(cardLength) && 
+             (['65'].includes(cardFirstTwoChars) ||
+              ['644', '645', '646', '647', '648', '649'].includes(cardNumber.slice(0, 3)) || // could refactor for ranges
+              ['6011'].includes(cardNumber.slice(0,4)))) {
     cardNetwork = 'Discover';
-  } else if ([12, 13, 14, 15, 16, 17, 18, 19].includes(cardLength) && ['5018', '5020', '5038', '6304'].includes(cardNumber.slice(0,4))) {
+  } else if ([12, 13, 14, 15, 16, 17, 18, 19].includes(cardLength) &&
+             ['5018', '5020', '5038', '6304'].includes(cardNumber.slice(0, 4))) {
     cardNetwork = 'Maestro';
-  }
+  } else {
+    for (let length = 16; length < 20; length++) {
+      for (let prefix = 622126; prefix < 622926; prefix++) {
+        // fill in
+      }
 
+      // next set
+
+      // next set
+    }
+    cardNetwork = 'China UnionPay'; 
+  }
+  
   return cardNetwork;
 };
