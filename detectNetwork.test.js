@@ -243,3 +243,21 @@ describe('Maestro', function() {
   }
 });
 
+
+describe('Switch', function() {
+
+  var should = chai.should();
+
+  let prefixes = ['4903', '4905', '4911', '4936', '564182', '633110', '6333', '6759'];
+  let lengths = [16, 18, 19];
+
+  for (let i = 0; i < prefixes.length; i++) {
+    for (let j = 0; j < lengths.length; j++) {
+      let cardNumber = `${prefixes[i]}`.padEnd(lengths[j], '1');
+      
+      it(`has a prefix of ${prefixes[i]} and a length of ${lengths[j]}`, function() {
+        detectNetwork(cardNumber).should.equal('Switch');
+      });
+    }
+  }
+});
